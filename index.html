@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omniamarket Tech — Offerte Elettronica & Accessori</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --whatsapp: #16a34a;
+      --whatsapp-hover: #15803d;
+      --badge-bg: #dbeafe;
+      --badge-text: #1e40af;
+      --border: #e5e7eb;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      font-size: 0.82rem;
+      padding: 8px 12px;
+      font-weight: 500;
+    }
+
+    /* Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      padding: 14px 16px;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand span {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .cart-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s ease;
+    }
+
+    .cart-btn:active {
+      transform: scale(0.97);
+    }
+
+    .cart-count {
+      background: var(--whatsapp);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hero h1 {
+      font-size: 1.5rem;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      max-width: 640px;
+    }
+
+    /* Search & Filters */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background: var(--surface);
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .cat-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .cat-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Product Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #ffffff;
+      border-bottom: 1px solid #f1f5f9;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+      display: block;
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      z-index: 2;
+    }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card-cat {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .card-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .variant-select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      background: #f8fafc;
+      color: var(--text);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .old-price {
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .btn-add {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .btn-add:hover {
+      opacity: 0.92;
+    }
+
+    /* Modal & Drawer Overlays */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--surface);
+      border-radius: var(--radius);
+      max-width: 480px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    /* Cart Drawer */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 70;
+      display: none;
+      justify-content: flex-end;
+    }
+
+    .drawer-overlay.open {
+      display: flex;
+    }
+
+    .drawer {
+      background: var(--surface);
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .cart-items {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #f8fafc;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .checkout-form label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .checkout-form input,
+    .checkout-form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: #fff;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.15rem;
+      font-weight: 800;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      margin-top: 6px;
+    }
+
+    .btn-whatsapp {
+      background: var(--whatsapp);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 12px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--whatsapp-hover);
+    }
+
+    /* Footer */
+    footer {
+      max-width: 1120px;
+      margin: 40px auto 0;
+      padding: 20px 16px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      z-index: 90;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar" id="topBarText">
+    Spedizione tracciata 24/48h in tutta Italia • Ritiro a mano disponibile
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand" id="brandTitle">Omniamarket <span>Tech</span></div>
+      <button class="cart-btn" onclick="toggleCart(true)">
+        Carrello <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Accessori Tech & Idee Regalo in Pronta Consegna</h1>
+      <p>Scegli i prodotti, aggiungi al carrello e conferma la disponibilità su WhatsApp in un clic. Pagamento sicuro con PayPal, Bonifico/Postepay o alla consegna a mano.</p>
+    </section>
+
+    <section class="controls">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Cerca auricolari, cuffie P9, power bank, smartwatch..."
+        oninput="renderProducts()"
+      />
+      <div class="categories" id="categoryBar"></div>
+    </section>
+
+    <section class="grid" id="productGrid"></section>
+  </main>
+
+  <footer>
+    <p id="footerInfo">Omniamarket Tech — Catalogo digitale. Gli ordini vengono confermati su WhatsApp previa verifica disponibilità.</p>
+  </footer>
+
+  <!-- Modal Dettagli Prodotto -->
+  <div class="overlay" id="productModal" onclick="closeModalOnBg(event)">
+    <div class="modal">
+      <button class="close-btn" onclick="toggleModal(false)">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Carrello Laterale -->
+  <div class="drawer-overlay" id="cartDrawer" onclick="closeDrawerOnBg(event)">
+    <div class="drawer">
+      <div class="drawer-header">
+        <h2>Il tuo riepilogo</h2>
+        <button class="close-btn" style="position:static;" onclick="toggleCart(false)">✕</button>
+      </div>
+
+      <div class="cart-items" id="cartItemsContainer"></div>
+
+      <div class="checkout-form" id="checkoutSection" style="display:none;">
+        <div>
+          <label for="deliveryType">Modalità di consegna</label>
+          <select id="deliveryType" onchange="renderCart()">
+            <option value="shipping">Spedizione Corriere 24/48h (+5,90 €)</option>
+            <option value="pickup">Ritiro a mano (Gratis)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="customerName">Il tuo Nome</label>
+          <input type="text" id="customerName" placeholder="Es. Marco Rossi" />
+        </div>
+
+        <div id="addressGroup">
+          <label for="customerAddress">Città e Indirizzo di spedizione</label>
+          <input type="text" id="customerAddress" placeholder="Es. Via Roma 10, Napoli" />
+        </div>
+
+        <div>
+          <label for="paymentMethod">Metodo di pagamento preferito</label>
+          <select id="paymentMethod">
+            <option value="PayPal">PayPal (Link rapido)</option>
+            <option value="Postepay / Bonifico">Postepay / Bonifico Istantaneo</option>
+            <option value="Contanti al ritiro">Contanti (solo ritiro a mano)</option>
+          </select>
+        </div>
+
+        <div class="summary-row">
+          <span>Subtotale prodotti:</span>
+          <span id="subtotalText">0,00 €</span>
+        </div>
+        <div class="summary-row">
+          <span>Spedizione:</span>
+          <span id="shippingText">0,00 €</span>
+        </div>
+        <div class="summary-total">
+          <span>Totale stimato:</span>
+          <span id="totalText">0,00 €</span>
+        </div>
+
+        <button class="btn-whatsapp" onclick="sendWhatsAppOrder()">
+          Invia ordine su WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Aggiunto al carrello</div>
+
+  <script>
+    // ==========================================
+    // 1. CONFIGURAZIONE NEGOZIO (MODIFICA QUI)
+    // ==========================================
+    const STORE_CONFIG = {
+      storeName: "Omniamarket",
+      storeTag: "Tech",
+      whatsappNumber: "393330000000", // Inserisci il tuo numero reale con 39 davanti
+      shippingCost: 5.90,
+      freeShippingThreshold: 39.00
+    };
+
+    // ==========================================
+    // 2. CATALOGO PRODOTTI E PREZZI (MODIFICA QUI)
+    // ==========================================
+    const PRODUCTS = [
+      {
+        id: "auricolari-anc",
+        name: "Auricolari Wireless Pro (100% ANC)",
+        category: "Audio",
+        price: 24.90,
+        oldPrice: 39.90,
+        badge: "Più venduto",
+        image: "img/auricolari-anc.jpg",
+        shortDesc: "Cancellazione attiva del rumore (ANC), custodia di ricarica wireless e abbinamento rapido.",
+        specs: [
+          "Cancellazione Attiva del Rumore (100% ANC)",
+          "Custodia compatta con ricarica wireless e cavo",
+          "Comandi touch sugli auricolari e microfono HD",
+          "Compatibili con iPhone (iOS) e Android"
+        ]
+      },
+      {
+        id: "cuffie-p9",
+        name: "Cuffie Wireless Bluetooth P9",
+        category: "Audio",
+        price: 16.90,
+        oldPrice: 29.90,
+        badge: "Nuovo arrivo",
+        image: "img/cuffie-p9.jpg",
+        variants: ["Nero / Grigio Scuro", "Blu", "Argento / Bianco"],
+        shortDesc: "Cuffie Over-Ear Hi-Fi con driver da 50mm, padiglioni traspiranti e tasti fisici integrati.",
+        specs: [
+          "Speaker dinamico Hi-Fi da 50mm con bassi potenti",
+          "Supporto audio AAC/SBC e connessione Bluetooth stabile",
+          "Padiglioni morbidi ergonomici e archetto regolabile",
+          "Tasti fisici laterali per volume, tracce e chiamate"
+        ]
+      },
+      {
+        id: "earpods-lightning",
+        name: "EarPods con Connettore Lightning",
+        category: "Audio",
+        price: 9.90,
+        oldPrice: 19.90,
+        badge: "Pronta consegna",
+        image: "img/earpods-lightning.jpg",
+        shortDesc: "Auricolari cablati con attacco Lightning per iPhone, microfono e comandi sul filo.",
+        specs: [
+          "Connettore Lightning diretto per dispositivi iOS",
+          "Telecomando integrato su cavo per volume e chiamate",
+          "Audio nitido senza bisogno di ricarica",
+          "Confezione rigida protettiva inclusa"
+        ]
+      },
+      {
+        id: "powerbank-magnetico",
+        name: "Power Bank Magnetico 10.000 mAh",
+        category: "Ricarica",
+        price: 19.90,
+        oldPrice: 29.90,
+        badge: "Wireless 15W",
+        image: "img/powerbank-magnetico.jpg",
+        shortDesc: "Battery Pack magnetico ultrasottile da 10.000 mAh con ricarica wireless rapida fino a 15W.",
+        specs: [
+          "Capacità 10.000 mAh (Input 5V=2.1A)",
+          "Ricarica wireless magnetica fino a 15W",
+          "Aggancio saldo sul retro dello smartphone",
+          "Compatto e tascabile, certificazione CE / RoHS"
+        ]
+      },
+      {
+        id: "bundle-p9-ultra",
+        name: "Bundle P9 Ultra 2 (Cuffie + Smartwatch)",
+        category: "Bundle",
+        price: 34.90,
+        oldPrice: 59.90,
+        badge: "Offerta Bundle",
+        image: "img/bundle-p9-ultra.jpg",
+        shortDesc: "Set completo con Cuffie P9, Smartwatch Display 2.20\" e 7 cinturini intercambiabili inclusi.",
+        specs: [
+          "Cuffie Over-Ear P9 wireless (archetto rosso / padiglioni rosa)",
+          "Smartwatch Ultra 2 con schermo infinito da 2.20 pollici",
+          "Kit con 7 cinturini intercambiabili (inclusi bianco e verde)",
+          "Cavo di ricarica e manualistica inclusi nella scatola"
+        ]
+      }
+    ];
+
+    // ==========================================
+    // 3. LOGICA APPLICAZIONE
+    // ==========================================
+    let selectedCategory = "Tutti";
+    let cart = [];
+
+    function formatPrice(num) {
+      return num.toFixed(2).replace(".", ",") + " €";
+    }
+
+    function getFallbackSvg(title) {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+        <rect width="600" height="450" fill="#f1f5f9"/>
+        <text x="50%" y="48%" dominant-baseline="middle" text-anchor="middle" fill="#334155" font-family="sans-serif" font-size="20" font-weight="bold">${title}</text>
+        <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="#64748b" font-family="sans-serif" font-size="14">Salva la foto nella cartella img/</text>
+      </svg>`;
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+    }
+
+    function initStore() {
+      document.getElementById("brandTitle").innerHTML = `${STORE_CONFIG.storeName} <span>${STORE_CONFIG.storeTag}</span>`;
+      document.getElementById("topBarText").textContent =
+        `Spedizione 24/48h (${formatPrice(STORE_CONFIG.shippingCost)} — Gratis sopra ${formatPrice(STORE_CONFIG.freeShippingThreshold)}) • Ritiro a mano disponibile`;
+
+      const categories = ["Tutti", ...new Set(PRODUCTS.map(p => p.category))];
+      const catBar = document.getElementById("categoryBar");
+      catBar.innerHTML = categories.map(cat => `
+        <button class="cat-btn ${cat === selectedCategory ? "active" : ""}" onclick="setCategory('${cat}')">${cat}</button>
+      `).join("");
+
+      renderProducts();
+      renderCart();
+    }
+
+    function setCategory(cat) {
+      selectedCategory = cat;
+      initStore();
+    }
+
+    function renderProducts() {
+      const query = document.getElementById("searchInput").value.toLowerCase().trim();
+      const grid = document.getElementById("productGrid");
+
+      const filtered = PRODUCTS.filter(p => {
+        const matchCat = selectedCategory === "Tutti" || p.category === selectedCategory;
+        const matchText = p.name.toLowerCase().includes(query) || p.shortDesc.toLowerCase().includes(query);
+        return matchCat && matchText;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="color:var(--muted);">Nessun prodotto trovato con questi filtri.</p>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => `
+        <article class="card">
+          <div class="card-img-wrap" onclick="openProductModal('${p.id}')">
+            ${p.badge ? `<span class="badge">${p.badge}</span>` : ""}
+            <img src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='${getFallbackSvg(p.name)}';" />
+          </div>
+          <div class="card-body">
+            <div class="card-cat">${p.category}</div>
+            <h3 class="card-title" onclick="openProductModal('${p.id}')">${p.name}</h3>
+            <p class="card-desc">${p.shortDesc}</p>
+            ${p.variants ? `
+              <select id="var-${p.id}" class="variant-select">
+                ${p.variants.map(v => `<option value="${v}">Colore: ${v}</option>`).join("")}
+              </select>
+            ` : ""}
+            <div class="price-row">
+              <span class="price">${formatPrice(p.price)}</span>
+              ${p.oldPrice ? `<span class="old-price">${formatPrice(p.oldPrice)}</span>` : ""}
+            </div>
+            <div class="card-actions">
+              <button class="btn-outline" onclick="openProductModal('${p.id}')">Dettagli</button>
+              <button class="btn-add" onclick="addToCart('${p.id}')">+ Aggiungi</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function openProductModal(id) {
+      const p = PRODUCTS.find(item => item.id === id);
+      if (!p) return;
+
+      const currentVarEl = document.getElementById(`var-${p.id}`);
+      const selectedVar = currentVarEl ? currentVarEl.value : (p.variants ? p.variants[0] : "");
+
+      document.getElementById("modalContent").innerHTML = `
+        <img src="${p.image}" alt="${p.name}" style="width:100%;border-radius:10px;margin-bottom:14px;max-height:240px;object-fit:contain;background:#fff;"
+             onerror="this.onerror=null;this.src='${getFallbackSvg(p.name)}';" />
+        <div class="card-cat">${p.category}</div>
+        <h2 style="margin:4px 0 8px;">${p.name}</h2>
+        <div class="price-row" style="margin-bottom:12px;">
+          <span class="price">${formatPrice(p.price)}</span>
+          ${p.oldPrice ? `<span class="old-price">${formatPrice(p.oldPrice)}</span>` : ""}
+        </div>
+        <p style="font-size:0.92rem;color:var(--muted);margin-bottom:12px;">${p.shortDesc}</p>
+        ${p.variants ? `
+          <div style="margin-bottom:14px;">
+            <label style="font-size:0.82rem;font-weight:700;display:block;margin-bottom:4px;">Seleziona colore:</label>
+            <select id="modal-var-${p.id}" class="variant-select">
+              ${p.variants.map(v => `<option value="${v}" ${v === selectedVar ? "selected" : ""}>${v}</option>`).join("")}
+            </select>
+          </div>
+        ` : ""}
+        <ul style="padding-left:18px;font-size:0.88rem;margin-bottom:18px;display:flex;flex-direction:column;gap:6px;">
+          ${p.specs.map(s => `<li>${s}</li>`).join("")}
+        </ul>
+        <button class="btn-add" style="width:100%;padding:13px;font-size:0.95rem;" onclick="addToCart('${p.id}', true); toggleModal(false);">
+          Aggiungi al carrello • ${formatPrice(p.price)}
+        </button>
+      `;
+      toggleModal(true);
+    }
+
+    function toggleModal(show) {
+      document.getElementById("productModal").classList.toggle("open", show);
+    }
+
+    function closeModalOnBg(e) {
+      if (e.target.id === "productModal") toggleModal(false);
+    }
+
+    function toggleCart(show) {
+      document.getElementById("cartDrawer").classList.toggle("open", show);
+    }
+
+    function closeDrawerOnBg(e) {
+      if (e.target.id === "cartDrawer") toggleCart(false);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1800);
+    }
+
+    function addToCart(id, fromModal = false) {
+      const p = PRODUCTS.find(item => item.id === id);
+      if (!p) return;
+
+      let variant = "";
+      if (p.variants) {
+        const selectEl = document.getElementById(fromModal ? `modal-var-${id}` : `var-${id}`);
+        variant = selectEl ? selectEl.value : p.variants[0];
+      }
+
+      const cartKey = variant ? `${id}::${variant}` : id;
+      const existing = cart.find(item => item.key === cartKey);
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ key: cartKey, id, variant, qty: 1 });
+      }
+      renderCart();
+      showToast("Prodotto aggiunto al carrello");
+    }
+
+    function updateQty(key, delta) {
+      const item = cart.find(i => i.key === key);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.key !== key);
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById("cartCount").textContent = totalItems;
+
+      const container = document.getElementById("cartItemsContainer");
+      const checkout = document.getElementById("checkoutSection");
+
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="color:var(--muted);text-align:center;margin-top:30px;">Il carrello è vuoto. Aggiungi uno o più prodotti per ordinare.</p>`;
+        checkout.style.display = "none";
+        return;
+      }
+
+      checkout.style.display = "flex";
+      let subtotal = 0;
+
+      container.innerHTML = cart.map(item => {
+        const p = PRODUCTS.find(prod => prod.id === item.id);
+        const lineTotal = p.price * item.qty;
+        subtotal += lineTotal;
+        return `
+          <div class="cart-item">
+            <div>
+              <div style="font-weight:700;font-size:0.92rem;">${p.name}</div>
+              ${item.variant ? `<div style="font-size:0.78rem;color:var(--accent);font-weight:600;">Colore: ${item.variant}</div>` : ""}
+              <div style="font-size:0.82rem;color:var(--muted);">${formatPrice(p.price)} cad.</div>
+            </div>
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="updateQty('${item.key}', -1)">-</button>
+              <span style="font-weight:700;min-width:18px;text-align:center;">${item.qty}</span>
+              <button class="qty-btn" onclick="updateQty('${item.key}', 1)">+</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const deliveryType = document.getElementById("deliveryType").value;
+      document.getElementById("addressGroup").style.display = deliveryType === "shipping" ? "block" : "none";
+
+      let shipping = 0;
+      if (deliveryType === "shipping") {
+        shipping = subtotal >= STORE_CONFIG.freeShippingThreshold ? 0 : STORE_CONFIG.shippingCost;
+      }
+
+      const total = subtotal + shipping;
+      document.getElementById("subtotalText").textContent = formatPrice(subtotal);
+      document.getElementById("shippingText").textContent = shipping === 0 ? "Gratis" : formatPrice(shipping);
+      document.getElementById("totalText").textContent = formatPrice(total);
+    }
+
+    function sendWhatsAppOrder() {
+      if (cart.length === 0) return;
+
+      const name = document.getElementById("customerName").value.trim() || "Cliente";
+      const deliveryType = document.getElementById("deliveryType").value;
+      const address = document.getElementById("customerAddress").value.trim();
+      const payment = document.getElementById("paymentMethod").value;
+
+      if (deliveryType === "shipping" && !address) {
+        alert("Inserisci la città e l'indirizzo per la spedizione.");
+        return;
+      }
+
+      let subtotal = 0;
+      const lines = cart.map(item => {
+        const p = PRODUCTS.find(prod => prod.id === item.id);
+        const lineTotal = p.price * item.qty;
+        subtotal += lineTotal;
+        const varLabel = item.variant ? ` [${item.variant}]` : "";
+        return `• ${item.qty}x ${p.name}${varLabel} (${formatPrice(lineTotal)})`;
+      });
+
+      const shipping = (deliveryType === "shipping" && subtotal < STORE_CONFIG.freeShippingThreshold)
+        ? STORE_CONFIG.shippingCost
+        : 0;
+      const total = subtotal + shipping;
+
+      const deliveryLabel = deliveryType === "shipping"
+        ? `Spedizione Corriere (${address})`
+        : "Ritiro a mano";
+
+      const message =
+        `Ciao ${STORE_CONFIG.storeName}! Vorrei verificare la disponibilità e ordinare:\n\n` +
+        `${lines.join("\n")}\n\n` +
+        `*Consegna:* ${deliveryLabel}\n` +
+        `*Pagamento:* ${payment}\n` +
+        `*Totale:* ${formatPrice(total)}\n` +
+        `*Nome:* ${name}`;
+
+      const url = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+
+    initStore();
+  </script>
+</body>
+</html>
